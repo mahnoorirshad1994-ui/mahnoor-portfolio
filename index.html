@@ -1,0 +1,647 @@
+<!--
+=======================================================
+  MAHNOOR IRSHAD — PORTFOLIO WEBSITE
+  Ready for GitHub Pages deployment
+=======================================================
+
+BEFORE GOING LIVE — replace these placeholders:
+
+1. PHOTO
+   Find: id="photo-container"
+   Replace the placeholder div with:
+   <img src="photo.jpg" alt="Mahnoor Irshad"
+        style="width:180px;height:220px;object-fit:cover;object-position:top;">
+
+2. UK PHONE NUMBER
+   Find: +44 XXXXXXXXXX
+   Replace with your actual UK number
+
+3. CV FILES
+   Add these two files to the same folder as index.html:
+   - Mahnoor_Irshad_CV_UK.pdf
+   - Mahnoor_Irshad_CV_EU.pdf
+   The site auto-detects location and serves the right one.
+   The user always sees a single "Download CV" button.
+
+4. CASE STUDY PAGES (built separately)
+   Add these files to the same folder:
+   - case-study-filter-bar.html
+   - case-study-truestimate.html
+   - case-study-trubroker.html
+   Then update the "Request Full Case Study" mailto links
+   to href links pointing to those files.
+
+5. WRITING / BLOG
+   The Writing section shows "Writing coming soon"
+   When you have a Medium or Substack, replace with RSS feed.
+
+DEPLOY TO GITHUB PAGES:
+   1. Create a repo at github.com
+   2. Upload index.html + CV files + photo + case study HTMLs
+   3. Go to Settings > Pages > Deploy from main branch
+   4. Your site will be live at yourusername.github.io/repo-name
+
+=======================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahnoor Irshad — Product Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #0A0A0A;
+      --bg-subtle:  #111111;
+      --border:     #1E1E1E;
+      --border-mid: #2A2A2A;
+      --white:      #F2F2F2;
+      --mid:        #AAAAAA;
+      --dim:        #707070;
+      --blue:       #8EB4F0;
+      --blue-bright:#3B6FE8;
+      --navy:       #0A1F8F;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 24px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px; font-weight: 600; letter-spacing: -0.02em;
+      text-decoration: none;
+      background: linear-gradient(90deg, #F2F2F2 0%, #8EB4F0 40%, #3B6FE8 60%, #F2F2F2 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; color: var(--mid);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-linkedin {
+      color: var(--blue); font-weight: 500;
+    }
+    .nav-links .nav-linkedin:hover { color: var(--white); }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 740px; margin: 0 auto; padding: 0 40px; }
+    section { padding: 110px 0; border-top: 1px solid var(--border); }
+
+    /* ── HERO ── */
+    #hero {
+      max-width: 740px; margin: 0 auto;
+      padding: 180px 40px 110px;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 180px;
+      gap: 60px; align-items: start;
+    }
+    .hero-eyebrow {
+      font-size: 12px; font-weight: 400; color: var(--blue);
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(32px, 4.5vw, 50px); font-weight: 400;
+      line-height: 1.15; letter-spacing: -0.025em;
+      color: var(--white); margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 16px; font-weight: 300; color: var(--mid);
+      line-height: 1.85; margin-bottom: 40px;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Photo placeholder */
+    .photo-placeholder {
+      width: 180px; height: 220px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-mid);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      flex-shrink: 0;
+    }
+    .photo-placeholder svg { opacity: 0.25; }
+    .photo-placeholder span {
+      font-size: 11px; font-weight: 400; color: var(--dim);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
+      padding: 11px 26px; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      transition: all 0.15s; border: none;
+    }
+    .btn-light { background: var(--white); color: var(--bg); }
+    .btn-light:hover { background: var(--blue); color: var(--bg); }
+    .btn-ghost { background: none; border: 1px solid var(--border-mid); color: var(--mid); }
+    .btn-ghost:hover { border-color: var(--white); color: var(--white); }
+    .btn-inline {
+      background: none; border: none; padding: 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 400; color: var(--blue);
+      cursor: pointer; text-decoration: none; transition: color 0.15s;
+    }
+    .btn-inline:hover { color: var(--white); }
+
+    /* ── SECTION LABELS ── */
+    .eyebrow {
+      font-size: 11px; font-weight: 500; color: var(--blue);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 36px;
+    }
+    h2 {
+      font-size: clamp(26px, 3vw, 38px); font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1.2;
+      color: var(--white); margin-bottom: 48px;
+    }
+
+    .skill-item:first-child,
+    .tl-item:first-child,
+    .case-item:first-child { border-top: none; }
+
+    /* ── ABOUT ── */
+    .about-body p {
+      font-size: 15px; font-weight: 300; color: var(--mid);
+      line-height: 1.95; margin-bottom: 22px;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ── CASE STUDIES ── */
+    .case-item {
+      display: grid; grid-template-columns: 1fr 110px;
+      gap: 40px; padding: 40px 0; align-items: start;
+      border-top: 1px solid var(--border);
+    }
+    .case-item:last-child { border-bottom: 1px solid var(--border); }
+    .case-meta {
+      font-size: 11px; font-weight: 400; color: var(--dim);
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .case-title {
+      font-size: 18px; font-weight: 400; letter-spacing: -0.01em;
+      color: var(--white); margin-bottom: 12px; line-height: 1.35;
+    }
+    .case-desc {
+      font-size: 14px; font-weight: 300; color: var(--mid);
+      line-height: 1.8; margin-bottom: 18px;
+    }
+    .case-stat { text-align: right; }
+    .case-number {
+      font-size: 38px; font-weight: 300; color: var(--blue);
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .case-number-label {
+      font-size: 11px; font-weight: 300; color: var(--dim);
+      margin-top: 6px; line-height: 1.45;
+    }
+
+    /* ── SKILLS ── */
+    .skill-item {
+      display: grid; grid-template-columns: 180px 1fr;
+      gap: 32px; padding: 20px 0;
+      border-top: 1px solid var(--border); align-items: baseline;
+    }
+    .skill-item:last-child { border-bottom: 1px solid var(--border); }
+    .skill-cat {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--white);
+    }
+    .skill-val {
+      font-size: 14px; font-weight: 300; color: var(--mid); line-height: 1.9;
+    }
+
+    /* ── TIMELINE ── */
+    .tl-item {
+      display: grid; grid-template-columns: 108px 1fr;
+      gap: 32px; padding: 30px 0;
+      border-top: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: 1px solid var(--border); }
+    .tl-date { font-size: 12px; font-weight: 300; color: var(--dim); padding-top: 3px; }
+    .tl-role {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 4px;
+    }
+    .tl-company {
+      font-size: 17px; font-weight: 400; color: var(--white);
+      letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .tl-desc { font-size: 14px; font-weight: 300; color: var(--mid); line-height: 1.8; }
+    .cv-cta {
+      margin-top: 48px; display: flex;
+      justify-content: space-between; align-items: center;
+      padding-top: 36px; border-top: 1px solid var(--border);
+    }
+    .cv-cta p { font-size: 14px; font-weight: 300; color: var(--mid); }
+
+    /* ── BLOG ── */
+    .blog-empty {
+      padding: 56px 0; border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .blog-empty p {
+      font-size: 14px; font-weight: 300; color: var(--dim);
+    }
+
+    /* ── CONTACT ── */
+    .contact-intro {
+      font-size: 20px; font-weight: 300; color: var(--mid);
+      line-height: 1.65; margin-bottom: 52px; letter-spacing: -0.01em;
+    }
+    .contact-fields { display: flex; flex-direction: column; gap: 28px; margin-bottom: 56px; }
+    .contact-field { display: flex; flex-direction: column; gap: 6px; }
+    .c-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--dim);
+    }
+    .c-val {
+      font-size: 15px; font-weight: 300; color: var(--white); text-decoration: none;
+    }
+    a.c-val:hover { color: var(--blue); }
+
+    .form { display: flex; flex-direction: column; gap: 28px; }
+    .form-row { display: flex; flex-direction: column; gap: 8px; }
+    .f-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--dim);
+    }
+    .f-input {
+      border: none; border-bottom: 1px solid var(--border-mid);
+      padding: 10px 0; font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 300; color: var(--white);
+      background: none; outline: none; transition: border-color 0.15s; width: 100%;
+    }
+    .f-input:focus { border-color: var(--blue); }
+    .f-input::placeholder { color: var(--dim); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px; font-weight: 600; letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #F2F2F2 0%, #8EB4F0 40%, #3B6FE8 60%, #F2F2F2 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-size: 12px; font-weight: 300; color: var(--dim);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── FADE ── */
+    .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.in { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 640px) {
+      nav { padding: 20px 24px; }
+      nav .nav-links { display: none; }
+      #hero { padding: 140px 24px 80px; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .photo-placeholder { width: 120px; height: 148px; }
+      .page { padding: 0 24px; }
+      .case-item { grid-template-columns: 1fr; }
+      .skill-item { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 1fr; }
+      footer { padding: 32px 24px; flex-direction: column; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-name">Mahnoor Irshad</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://linkedin.com/in/mahnoorirshad" target="_blank" class="nav-linkedin">LinkedIn ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Product Manager</p>
+      <h1>I build products that make complex things feel simple.</h1>
+      <p class="hero-sub">Six years across consumer apps and B2B products, currently at INSEAD. I have shipped features used by millions of marketplace users and helped enterprises close better deals with AI tools they actually want to use.</p>
+      <div class="hero-ctas">
+        <a href="#work" class="btn btn-light">See My Work</a>
+        <button class="btn btn-ghost" onclick="downloadCV()">Download CV</button>
+      </div>
+    </div>
+    <img src="photo.jpg" alt="Mahnoor Irshad" style="width:180px;height:220px;object-fit:cover;object-position:top;">
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ABOUT -->
+  <section id="about" class="fade">
+    <p class="eyebrow">About</p>
+    <div class="about-body">
+      <p>I have spent six years building products that people use at scale, from consumer apps with millions of users to AI tools that changed how enterprise teams work day to day. Most of that time was at Bayut and dubizzle, one of the Middle East's leading digital marketplaces, where I worked across the full product lifecycle in both B2C and B2B contexts.</p>
+      <p>What I find most interesting is the space where user behaviour meets commercial outcomes. The best product decisions I have made have come from understanding not just what users do, but why, and then connecting that to what the business actually needs.</p>
+      <p>I am currently completing an MBA at INSEAD. Outside of work, I co-founded a learning centre in Pakistan and have taught English and computer skills to migrant workers in the UAE. I care about building products that create access and opportunity for people who do not have enough of either. That is the direction I am building toward, though I am open to where that takes me.</p>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="work" class="fade">
+    <p class="eyebrow">Case Studies</p>
+    <h2>Selected work.</h2>
+
+    <div class="case-item">
+      <div>
+        <p class="case-meta">Bayut &middot; 2022 &middot; B2C &middot; Mobile</p>
+        <h3 class="case-title">Redesigning How Users Search on the Bayut App</h3>
+        <p class="case-desc">Filter usage was high but friction in the navigation pattern was creating a gap between user intent and action. I ran a controlled A/B test across Android and iOS, then investigated why 40% of users were still not engaging after the first result.</p>
+        <a href="mailto:mahnoor.irshad@insead.edu?subject=Request: Filter Bar Case Study" class="btn-inline">Request Full Case Study →</a>
+      </div>
+      <div class="case-stat">
+        <div class="case-number">75%</div>
+        <div class="case-number-label">increase in leads<br>per session</div>
+      </div>
+    </div>
+
+    <div class="case-item">
+      <div>
+        <p class="case-meta">Bayut &middot; 2024 &middot; B2C &middot; AI</p>
+        <h3 class="case-title">Bringing Property Valuation to the Bayut App</h3>
+        <p class="case-desc">Bayut had extensive data from its partnership with the Dubai Land Department. The challenge was making it accessible and actionable for three very different users within a single mobile experience.</p>
+        <a href="mailto:mahnoor.irshad@insead.edu?subject=Request: TruEstimate Case Study" class="btn-inline">Request Full Case Study →</a>
+      </div>
+      <div class="case-stat">
+        <div class="case-number">400K</div>
+        <div class="case-number-label">reports generated<br>since launch</div>
+      </div>
+    </div>
+
+    <div class="case-item">
+      <div>
+        <p class="case-meta">Bayut &middot; 2024 &middot; B2C &middot; Trust Systems</p>
+        <h3 class="case-title">Helping Buyers Find Agents They Could Trust</h3>
+        <p class="case-desc">With over 20,000 agents on the platform, buyers had no reliable way to know who would respond or follow through. I owned the consumer app experience for TruBroker, including the Find My Agent section and badge placement on listings.</p>
+        <a href="mailto:mahnoor.irshad@insead.edu?subject=Request: TruBroker Case Study" class="btn-inline">Request Full Case Study →</a>
+      </div>
+      <div class="case-stat">
+        <div class="case-number">5×</div>
+        <div class="case-number-label">growth in daily<br>Find My Agent views</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="fade">
+    <p class="eyebrow">Skills and Tools</p>
+    <h2>How I work.</h2>
+    <div class="skill-item">
+      <span class="skill-cat">Product Craft</span>
+      <span class="skill-val">Experimentation and A/B testing · Roadmap planning · User research · Prioritisation · Cross-functional delivery · Stakeholder management · Localisation and international expansion</span>
+    </div>
+    <div class="skill-item">
+      <span class="skill-cat">Technical</span>
+      <span class="skill-val">SQL · Python · Figma · Adobe XD · RStudio · SPSS</span>
+    </div>
+    <div class="skill-item">
+      <span class="skill-cat">AI Tools</span>
+      <span class="skill-val">Claude · Lovable · Bolt</span>
+    </div>
+    <div class="skill-item">
+      <span class="skill-cat">Tools</span>
+      <span class="skill-val">Jira · Confluence · ClickUp</span>
+    </div>
+    <div class="skill-item">
+      <span class="skill-cat">Domain</span>
+      <span class="skill-val">Consumer mobile apps · Native iOS and Android · B2B SaaS · AI products · Two-sided marketplaces · PropTech</span>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="fade">
+    <p class="eyebrow">Experience</p>
+    <h2>Where I have worked.</h2>
+
+    <div class="tl-item">
+      <div class="tl-date">2024 – 2025</div>
+      <div>
+        <p class="tl-role">Product Manager, AI SaaS Products</p>
+        <p class="tl-company">Bayut and dubizzle</p>
+        <p class="tl-desc">Built and launched GenAI products for property listings and enterprise operations, including a conversational AI chatbot that reduced support tickets by 63% and an AI call insights tool that improved sales by 15%.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2022 – 2024</div>
+      <div>
+        <p class="tl-role">Product Manager, Consumer Mobile Applications</p>
+        <p class="tl-company">Bayut</p>
+        <p class="tl-desc">Led product strategy for the Bayut app across B2C and B2B. Shipped TruBroker, TruEstimate, multilingual apps, and authentication redesign. Managed a cross-functional team of 30 across UAE, Romania, and Pakistan.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2021 – 2022</div>
+      <div>
+        <p class="tl-role">Junior Product Manager, Consumer Mobile Applications</p>
+        <p class="tl-company">Bayut</p>
+        <p class="tl-desc">Improved search efficiency and new user onboarding, increasing leads per session by 75% and reducing early drop-offs by 23%.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2020 – 2021</div>
+      <div>
+        <p class="tl-role">Product Associate, Content Products</p>
+        <p class="tl-company">Bayut</p>
+        <p class="tl-desc">Revamped key content pages increasing portal traffic by 16% annually. Managed content product integration post-acquisition of dubizzle.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2018 – 2020</div>
+      <div>
+        <p class="tl-role">Assistant Product Manager, Consumer Products</p>
+        <p class="tl-company">SilkBank</p>
+        <p class="tl-desc">Managed consumer credit line products and led the replacement of 400,000 Mastercard and Visa cards in compliance with State Bank of Pakistan regulation.</p>
+      </div>
+    </div>
+
+    <div class="cv-cta">
+      <p>Want to see the full picture?</p>
+      <button class="btn btn-light" onclick="downloadCV()">Download CV</button>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="fade">
+    <p class="eyebrow">Education</p>
+    <h2>Where I have studied.</h2>
+    <div class="tl-item">
+      <div class="tl-date">2025 – 2026</div>
+      <div>
+        <p class="tl-role">Master of Business Administration</p>
+        <p class="tl-company">INSEAD</p>
+        <p class="tl-desc">Fontainebleau, France. Focused on strategy, leadership, and technology. Clubs: TMT, Women in Business, AI.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2013 – 2017</div>
+      <div>
+        <p class="tl-role">BSc Management Science</p>
+        <p class="tl-company">LUMS</p>
+        <p class="tl-desc">Graduated with distinction, ranked in the top 1%.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="fade">
+    <p class="eyebrow">Writing</p>
+    <h2>Things I think about.</h2>
+    <div class="blog-empty">
+      <p>Writing coming soon.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fade">
+    <p class="eyebrow">Contact</p>
+    <p class="contact-intro">I am currently open to Senior PM roles in AI, consumer products, and mission-driven technology.</p>
+    <div class="contact-fields">
+      <div class="contact-field">
+        <span class="c-label">Email</span>
+        <a href="mailto:mahnoor.irshad@insead.edu" class="c-val">mahnoor.irshad@insead.edu</a>
+      </div>
+      <div class="contact-field">
+        <span class="c-label">Phone</span>
+        <span class="c-val" id="phone-display">—</span>
+      </div>
+      <div class="contact-field">
+        <span class="c-label">LinkedIn</span>
+        <a href="https://linkedin.com/in/mahnoorirshad" target="_blank" class="c-val">linkedin.com/in/mahnoorirshad ↗</a>
+      </div>
+    </div>
+
+    <form class="form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <label class="f-label">Name *</label>
+        <input type="text" id="f-name" class="f-input" placeholder="Your name" required>
+      </div>
+      <div class="form-row">
+        <label class="f-label">Company</label>
+        <input type="text" id="f-company" class="f-input" placeholder="Optional">
+      </div>
+      <div class="form-row">
+        <label class="f-label">Email *</label>
+        <input type="email" id="f-email" class="f-input" placeholder="your@email.com" required>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-light">Get in Touch</button>
+      </div>
+    </form>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Mahnoor Irshad &mdash; Product Manager</span>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#blog">Writing</a>
+    <a href="#contact">Contact</a>
+    <a href="https://linkedin.com/in/mahnoorirshad" target="_blank">LinkedIn ↗</a>
+  </div>
+</footer>
+
+<script>
+  let countryCode = null;
+
+  async function getCountry() {
+    if (countryCode) return countryCode;
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      countryCode = data.country_code;
+    } catch { countryCode = 'OTHER'; }
+    return countryCode;
+  }
+
+  async function initPhone() {
+    const c = await getCountry();
+    document.getElementById('phone-display').textContent =
+      c === 'GB' ? '+447438795430' : '+33 767 265 749';
+  }
+
+  async function downloadCV() {
+    const c = await getCountry();
+    const file = c === 'GB' ? 'Mahnoor_Irshad_CV_UK.pdf' : 'Mahnoor_Irshad_CV_EU.pdf';
+    const a = document.createElement('a');
+    a.href = file; a.download = 'Mahnoor_Irshad_CV.pdf';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const name    = document.getElementById('f-name').value;
+    const company = document.getElementById('f-company').value;
+    const email   = document.getElementById('f-email').value;
+    const subject = company
+      ? `Portfolio enquiry from ${name} at ${company}`
+      : `Portfolio enquiry from ${name}`;
+    const body = `Name: ${name}\nCompany: ${company || 'Not provided'}\nEmail: ${email}`;
+    window.location.href = `mailto:mahnoor.irshad@insead.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  initPhone();
+</script>
+</body>
+</html>
