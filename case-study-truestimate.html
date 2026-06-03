@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruEstimate™ — Mahnoor Irshad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0A0A0A;
+      --white:     #F2F2F2;
+      --mid:       #AAAAAA;
+      --dim:       #606060;
+      --blue:      #8EB4F0;
+      --bright:    #3B6FE8;
+      --deep:      #0D1535;
+      --border:    #1E1E1E;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 20px 56px; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10,10,10,0.88); backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600;
+      letter-spacing: -0.02em; text-decoration: none;
+      background: linear-gradient(90deg,#F2F2F2 0%,#8EB4F0 40%,#3B6FE8 60%,#F2F2F2 100%);
+      background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; animation: shimmer 3s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    .nav-back { font-size: 12px; color: var(--dim); text-decoration: none; letter-spacing: 0.04em; transition: color 0.15s; }
+    .nav-back:hover { color: var(--white); }
+
+    .dots { position: fixed; right: 28px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 200; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--dim); cursor: pointer; transition: all 0.25s; }
+    .dot.active { background: var(--blue); transform: scale(1.5); }
+
+    .slide { min-height: 100vh; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 100px 10vw; position: relative; }
+    .slide-inner { max-width: 900px; }
+
+    .slide-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bright); margin-bottom: 28px; }
+
+    /* COVER */
+    .slide-cover { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .cover-tag { font-size: 11px; font-weight: 500; color: var(--blue); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
+    .cover-tag::before { content:''; display:block; width:28px; height:1px; background:var(--blue); }
+    .cover-title { font-size: clamp(36px, 5.5vw, 72px); font-weight: 400; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 40px; }
+    .cover-meta { display: flex; gap: 40px; flex-wrap: wrap; padding-top: 36px; border-top: 1px solid var(--border); }
+    .cover-meta-item { display: flex; flex-direction: column; gap: 6px; }
+    .cover-meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+    .cover-meta-val { font-size: 14px; font-weight: 300; color: var(--mid); }
+    .scroll-hint { position: absolute; bottom: 36px; left: 10vw; font-size: 11px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+    .scroll-hint::after { content:''; display:block; width:24px; height:1px; background:var(--dim); }
+
+    .slide-statement { font-size: clamp(22px, 3.2vw, 42px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.35; color: var(--white); max-width: 780px; }
+    .slide-statement strong { color: var(--blue); font-weight: 500; }
+    .slide-body { font-size: 16px; font-weight: 300; color: var(--mid); line-height: 1.9; max-width: 680px; margin-top: 32px; }
+
+    /* USER TYPES */
+    .user-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 40px; }
+    .user-card { background: #141414; padding: 32px 28px; }
+    .user-num { font-size: 11px; font-weight: 600; color: var(--bright); letter-spacing: 0.1em; margin-bottom: 16px; }
+    .user-type { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 12px; }
+    .user-anxiety { font-size: 13px; font-weight: 400; color: var(--blue); font-style: italic; margin-bottom: 14px; line-height: 1.5; }
+    .user-desc { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.75; }
+
+    /* HYPOTHESIS */
+    .slide-deep { background: var(--deep); }
+    .hyp-text { font-size: clamp(20px, 2.8vw, 36px); font-weight: 300; font-style: italic; line-height: 1.4; color: var(--white); max-width: 760px; border-left: 3px solid var(--blue); padding-left: 32px; }
+
+    /* APPROACH */
+    .approach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 40px; }
+    .approach-card { background: #141414; padding: 32px 28px; }
+    .ac-num { font-size: 11px; font-weight: 600; color: var(--bright); letter-spacing: 0.1em; margin-bottom: 14px; }
+    .ac-title { font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 12px; line-height: 1.3; }
+    .ac-desc { font-size: 14px; font-weight: 300; color: var(--mid); line-height: 1.8; }
+    .ac-sub { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .ac-sub-label { font-size: 10px; font-weight: 600; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .ac-sub-val { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.7; }
+
+    /* CHALLENGES */
+    .challenge-row { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding: 32px 0; border-top: 1px solid var(--border); align-items: start; }
+    .challenge-row:last-child { border-bottom: 1px solid var(--border); }
+    .ch-title { font-size: 15px; font-weight: 500; color: var(--white); line-height: 1.35; }
+    .ch-desc { font-size: 14px; font-weight: 300; color: var(--mid); line-height: 1.85; }
+
+    /* OUTCOME */
+    .slide-outcome { background: var(--deep); }
+    .outcome-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 48px; }
+    .outcome-card { background: rgba(255,255,255,0.04); padding: 40px 36px; }
+    .outcome-num { font-size: clamp(48px, 7vw, 84px); font-weight: 300; color: var(--blue); letter-spacing: -0.04em; line-height: 1; margin-bottom: 12px; }
+    .outcome-label { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .outcome-sub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 2px; }
+    .outcome-sub-card { background: rgba(255,255,255,0.025); padding: 28px 32px; }
+    .outcome-sub-num { font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: var(--blue); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+    .outcome-sub-label { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+    /* TAKEAWAY */
+    .takeaway-text { font-size: clamp(20px, 2.8vw, 36px); font-weight: 300; font-style: italic; line-height: 1.45; color: var(--white); max-width: 760px; }
+    .takeaway-text em { color: var(--blue); font-style: normal; font-weight: 400; }
+    .takeaway-sig { margin-top: 48px; display: flex; gap: 16px; align-items: center; }
+    .sig-line { width: 32px; height: 1px; background: var(--dim); }
+    .sig-name { font-size: 13px; font-weight: 300; color: var(--dim); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Mahnoor Irshad</a>
+  <a href="index.html#work" class="nav-back">← All Case Studies</a>
+</nav>
+
+<div class="dots" id="dots">
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
+  <div class="dot" onclick="goTo(4)"></div>
+  <div class="dot" onclick="goTo(5)"></div>
+  <div class="dot" onclick="goTo(6)"></div>
+  <div class="dot" onclick="goTo(7)"></div>
+</div>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide slide-cover" id="s0">
+  <div class="slide-inner">
+    <div class="cover-tag">Case Study 02</div>
+    <h1 class="cover-title">Bringing Property Valuation to the Bayut App</h1>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><span class="cover-meta-label">Company</span><span class="cover-meta-val">Bayut</span></div>
+      <div class="cover-meta-item"><span class="cover-meta-label">Year</span><span class="cover-meta-val">2024</span></div>
+      <div class="cover-meta-item"><span class="cover-meta-label">Role</span><span class="cover-meta-val">Product Manager, Consumer Mobile</span></div>
+      <div class="cover-meta-item"><span class="cover-meta-label">Type</span><span class="cover-meta-val">B2C · Mobile · AI · Data Products</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</div>
+
+<!-- SLIDE 2: CONTEXT -->
+<div class="slide" style="background:#0D0D0D;" id="s1">
+  <div class="slide-inner">
+    <div class="slide-label">The Context</div>
+    <p class="slide-statement">Property decisions in the UAE are among the most significant financial decisions people make. The data existed. <strong>Making it useful at the point of decision did not.</strong></p>
+    <p class="slide-body">Bayut had a partnership with the Dubai Land Department and access to verified transaction data. Buyers, sellers, and agents were navigating the market without reliable, real-time valuation data in a single accessible place. The initial framing was straightforward: build a valuation tool. But that framing was too broad to build well. When I looked at who would actually use TruEstimate&#8482; and why, three distinct user types emerged, each with a different need and a different anxiety they needed to resolve.</p>
+  </div>
+</div>
+
+<!-- SLIDE 3: THREE USERS -->
+<div class="slide" style="background:var(--bg);" id="s2">
+  <div class="slide-inner">
+    <div class="slide-label">Three Users, One Experience</div>
+    <p class="slide-statement" style="font-size:clamp(18px,2.2vw,30px); color:var(--mid); font-weight:300;">The problem was not just building a valuation tool. It was building one experience that resolved a specific anxiety for three different users.</p>
+    <div class="user-grid">
+      <div class="user-card">
+        <div class="user-num">User 01</div>
+        <div class="user-type">Buyers</div>
+        <div class="user-anxiety">"Am I paying too much?"</div>
+        <div class="user-desc">Wanted to know if the price on a listing was fair before committing time and money. Anxious about overpaying in a market where pricing was opaque and negotiation norms were unclear.</div>
+      </div>
+      <div class="user-card">
+        <div class="user-num">User 02</div>
+        <div class="user-type">Sellers</div>
+        <div class="user-anxiety">"Am I underpricing my property?"</div>
+        <div class="user-desc">Wanted a credible, data-backed understanding of what their property was worth before engaging an agent. Anxious about leaving money on the table or being talked into a lower price.</div>
+      </div>
+      <div class="user-card">
+        <div class="user-num">User 03</div>
+        <div class="user-type">Agents</div>
+        <div class="user-anxiety">"Can I back this up with data?"</div>
+        <div class="user-desc">Wanted something they could use in client conversations to advise with confidence rather than estimation. Anxious about losing credibility when challenged on pricing recommendations.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: HYPOTHESIS -->
+<div class="slide slide-deep" id="s3">
+  <div class="slide-inner">
+    <div class="slide-label" style="color:var(--blue);">The Hypothesis</div>
+    <p class="hyp-text">If the report structure was designed around the decision each user type needed to make, rather than around the volume of data available, the product would drive action rather than just inform. The data was already there. What was missing was the structure to make it legible, contextual, and trustworthy at the point of decision.</p>
+  </div>
+</div>
+
+<!-- SLIDE 5: APPROACH -->
+<div class="slide" style="background:#0D0D0D;" id="s4">
+  <div class="slide-inner">
+    <div class="slide-label">The Approach</div>
+    <div class="approach-grid">
+      <div class="approach-card">
+        <div class="ac-num">01</div>
+        <div class="ac-title">Entry points placed contextually, not uniformly</div>
+        <div class="ac-desc">The first decision was how many access points to build and where to place them. Too few and users would not find the feature. Too many and it would feel pushed rather than useful. I placed entry points where each user type was in their journey when valuation data would be most relevant, rather than applying them uniformly across the app.</div>
+        <div class="ac-sub">
+          <div class="ac-sub-label">The distinction</div>
+          <div class="ac-sub-val">Placement was a deliberate choice, not a default. It was the difference between a feature that feels native and one that feels bolted on.</div>
+        </div>
+      </div>
+      <div class="approach-card">
+        <div class="ac-num">02</div>
+        <div class="ac-title">Report structure optimised for decision-making</div>
+        <div class="ac-desc">A full TruEstimate&#8482; report can contain estimated sale value, rental yield, price trends, transaction history, and comparable properties. The question was how much to show on mobile without losing users before they reached the parts that mattered most. Leading with decision-critical information and allowing users to expand further sections produced better engagement than presenting everything upfront.</div>
+        <div class="ac-sub">
+          <div class="ac-sub-label">Information density is a product decision</div>
+          <div class="ac-sub-val">Every additional data point on mobile competes for attention. What you leave out is as important as what you include.</div>
+        </div>
+      </div>
+      <div class="approach-card">
+        <div class="ac-num">03</div>
+        <div class="ac-title">Property recommendations placed last, not integrated</div>
+        <div class="ac-desc">The user had already shared meaningful data about the type of property they were interested in. Surfacing relevant listings within the report could increase engagement. But the risk was undermining the report's credibility as a neutral valuation tool by making it feel commercial. Recommendations were placed at the end of the report, after all valuation data, as an optional next step. Additive, not embedded.</div>
+      </div>
+      <div class="approach-card">
+        <div class="ac-num">04</div>
+        <div class="ac-title">Push strategy to build the habit</div>
+        <div class="ac-desc">Beyond in-app placement, I worked on how to actively bring users to TruEstimate&#8482; through notifications, homepage placement, and integration into the listing experience. The goal was for valuation data to surface naturally within the property search journey, not only when a user actively sought it out.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: WHAT MADE IT HARD -->
+<div class="slide" style="background:var(--bg);" id="s5">
+  <div class="slide-inner">
+    <div class="slide-label">What Made It Hard</div>
+    <div style="margin-top:40px;">
+      <div class="challenge-row">
+        <div class="ch-title">Serving three users with one experience</div>
+        <div class="ch-desc">Each user type had a different primary question. A buyer checking a listing, a seller pricing their apartment, and an agent advising a client all arrived at the same report with a different need. The structure had to answer all three without feeling generic to any of them. Every choice about what to lead with, what to expand on, and what to leave out had to work across all three contexts simultaneously.</div>
+      </div>
+      <div class="challenge-row">
+        <div class="ch-title">Information density on mobile</div>
+        <div class="ch-desc">Desktop allows more information per screen. On mobile, every additional data point competes for attention. Deciding what to show first, what to hide behind a tap, and what to leave out entirely required multiple rounds of iteration with the design team before the right balance emerged. The first version showed too much. The instinct to include more data had to be actively resisted.</div>
+      </div>
+      <div class="challenge-row">
+        <div class="ch-title">Driving action, not just views</div>
+        <div class="ch-desc">A report that users read but do not act on does not create value for the platform. Every structural decision in the report was evaluated against whether it moved users toward a next step — contacting an agent, saving a listing, or requesting a valuation. Engagement without downstream action was a signal that the experience was informing without converting.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: WHAT CHANGED -->
+<div class="slide slide-outcome" id="s6">
+  <div class="slide-inner">
+    <div class="slide-label" style="color:var(--blue);">What Changed</div>
+    <p class="slide-statement" style="color:rgba(255,255,255,0.6); font-size:clamp(15px,1.8vw,24px);">Since launch in June 2024:</p>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-num">400K+</div>
+        <div class="outcome-label">TruEstimate&#8482; reports generated</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">1 in 2</div>
+        <div class="outcome-label">Property transactions in the UAE now backed by a TruEstimate&#8482; report</div>
+      </div>
+    </div>
+    <div class="outcome-sub">
+      <div class="outcome-sub-card">
+        <div class="outcome-sub-num">~40%</div>
+        <div class="outcome-sub-label">Of total report generation driven by the app</div>
+      </div>
+      <div class="outcome-sub-card">
+        <div class="outcome-sub-num">4.8</div>
+        <div class="outcome-sub-label">App Store rating reached after launch</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: TAKEAWAY -->
+<div class="slide" style="background:var(--bg);" id="s7">
+  <div class="slide-inner">
+    <div class="slide-label">What I Took Away</div>
+    <p class="takeaway-text">The most useful reframe for this product was treating it as <em>a transparency tool rather than a valuation feature.</em> The data was always there. What was missing was the structure to make it legible, contextual, and trustworthy at the point of decision. When I designed around the specific anxieties each user brought to the product — not just the information they needed — the hard decisions about what to show, what to prioritise, and what to hold back became considerably easier to answer.</p>
+    <div class="takeaway-sig"><div class="sig-line"></div><div class="sig-name">Mahnoor Irshad &nbsp;·&nbsp; Product Manager</div></div>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  function goTo(i) { slides[i].scrollIntoView({ behavior: 'smooth' }); }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const i = [...slides].indexOf(e.target);
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[i]) dots[i].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
